@@ -5,31 +5,52 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>индекс Банцафа</title>
+    <link rel="stylesheet" href="background.css" />
     <link rel="stylesheet" href="style.css" />
   </head>
   <body>
-    <div class="container">
-      <caption>
-        введите количество партий
-        <input min="2" id="numPart" type="number" value="3" />
-      </caption>
-      <p>партии:</p>
-      <div id="mas">
-        <input min="1" class="mas-item" type="number" value="50" />
-        <input min="1" class="mas-item" type="number" value="49" />
-        <input min="1" class="mas-item" type="number" value="1" />
-      </div>
-      <caption>
-        введите квоту
-        <input min="2" id="quota" type="number" value="51" />
-      </caption>
-      <p id="col-vote">общее число голосов: 100</p>
-      <p>можно заполнить в ручную или нажать на кнопку "рандом"</p>
-      <button id="random" class="btn">рандом</button>
-      <button id="start" class="btn">вычислить</button>
+    <div id="particles-js"></div>
 
-      <div id="result"></div>
+    <div class="app">
+      <div class="container">
+        <h1>индекс банцафа</h1>
+        <div class="inputOne">
+          <p>1) Введите количество партий:</p>
+          <input min="2" id="numPart" type="text" value="3" />
+        </div>
+        <p>2) Введите голоса партий партии:</p>
+        <div id="mas">
+          <label
+            >1) <input min="1" value="50" class="mas-item" type="text" />
+          </label>
+          <label
+            >2) <input min="1" value="49" class="mas-item" type="text" />
+          </label>
+          <label>
+            3) <input min="1" value="1" class="mas-item" type="text" />
+          </label>
+        </div>
+
+        <p class="info">
+          можно заполнить в ручную или нажать на кнопку "рандом"
+        </p>
+
+        <button id="random" class="btn">рандом</button>
+
+        <div class="inputOne">
+          3) Введите квоту:
+          <input min="2" id="quota" type="text" value="51" />
+        </div>
+        <p id="col-vote">общее число голосов: 100</p>
+        <button id="start" class="btn">вычислить</button>
+
+        <div id="result"></div>
+      </div>
     </div>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+    <script src="particles.js"></script>
+    <script src="background.js"></script>
     <script src="main.js"></script>
   </body>
 </html>

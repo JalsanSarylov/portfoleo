@@ -1,9 +1,4 @@
 class Combinatorics {
-  /*
-   * @param arr {Array} Набор элементов.
-   * @param k {Number} Размер каждого сочетания.
-   * @return {Array} Возвращает все сочетания.
-   */
   static combine = (() => {
     let res = null;
     const combinations = (arr, k, start, idx, current) => {
@@ -32,6 +27,25 @@ document.addEventListener("DOMContentLoaded", function () {
   let random = document.getElementById("random");
   let start = document.getElementById("start");
 
+  let getInputNumbers = (input) => {
+    return input.value.replace(/\D/g, "");
+  };
+
+  let onInput = (e) => {
+    let input = e.target;
+    let inputValue = getInputNumbers(input);
+
+    if (!inputValue) return (input.value = "");
+    else return (input.value = inputValue);
+  };
+
+  let lessonInputs = () => {
+    let inputs = document.querySelectorAll("input");
+    inputs.forEach((el) => {
+      el.addEventListener("input", onInput);
+    });
+  };
+
   let drowColVote = (masItems) => {
     let colVote = document.getElementById("col-vote");
     let res = 0;
@@ -54,14 +68,17 @@ document.addEventListener("DOMContentLoaded", function () {
     let mas = document.getElementById("mas");
     let strEl = "";
     for (let i = 0; i < col; i++) {
-      strEl += `<input min="1" class = "mas-item" type="number" />`;
+      strEl += `<label>${
+        i + 1
+      })<input min="1" class = "mas-item" type="text" /></label>`;
     }
     mas.innerHTML = strEl;
     onChangeInputs();
+    lessonInputs();
   };
 
   let createMas = (e) => {
-    let col = e.target.value;
+    let col = getInputNumbers(e.target);
     if (col) drowInputs(col);
   };
 
@@ -110,6 +127,18 @@ document.addEventListener("DOMContentLoaded", function () {
     return res;
   };
 
+  let verification = (arr) => {
+    res = true;
+    arr.forEach((el) => {
+      str = el.value.replace(/\s/g, "");
+
+      if (str === "") {
+        res = false;
+      }
+    });
+    return res;
+  };
+
   numPart.addEventListener("input", createMas);
   random.onclick = function () {
     let mas = document.querySelectorAll(".mas-item");
@@ -122,39 +151,44 @@ document.addEventListener("DOMContentLoaded", function () {
   start.onclick = function () {
     let masEl = document.querySelectorAll(".mas-item");
     let mas = [];
-    masEl.forEach((el) => {
-      mas.push(el.value);
-    });
-
-    let combinations = getCombinations(mas);
-    let indexComb = getCombinationsIndex(mas);
-    let quota = document.getElementById("quota").value;
-    let indexWinCoalic = [];
-
-    for (let i = 0; i < combinations.length; i++) {
-      if (combinations[i] >= quota) indexWinCoalic.push(i);
-    }
-
-    let keys = [];
-    for (let i = 0; i < mas.length; i++) {
-      let n = 0;
-      indexWinCoalic.forEach((el) => {
-        if (combinations[el] - mas[i] < quota && indexComb[el].includes(i)) {
-          n++;
-        }
+    if (verification(masEl)) {
+      masEl.forEach((el) => {
+        mas.push(el.value);
       });
-      keys.push(n);
-    }
 
-    resStr = "";
-    keys.forEach((el, index) => {
-      resStr += `<p>индекс Банцафа ${index + 1} партии = ${el}/${
-        indexWinCoalic.length + mas.length - 1
-      }</p>`;
-    });
+      let combinations = getCombinations(mas);
+      let indexComb = getCombinationsIndex(mas);
+      let quota = document.getElementById("quota").value;
+      let indexWinCoalic = [];
 
-    document.getElementById("result").innerHTML = resStr;
+      for (let i = 0; i < combinations.length; i++) {
+        if (combinations[i] >= quota) indexWinCoalic.push(i);
+      }
+
+      let keys = [];
+      for (let i = 0; i < mas.length; i++) {
+        let n = 0;
+        indexWinCoalic.forEach((el) => {
+          if (combinations[el] - mas[i] < quota && indexComb[el].includes(i)) {
+            n++;
+          }
+        });
+        keys.push(n);
+      }
+
+      resStr = "";
+      keys.forEach((el, index) => {
+        resStr += `<p>индекс Банцафа ${index + 1} партии = ${el}/${
+          indexWinCoalic.length + mas.length - 1
+        }</p>`;
+      });
+
+      document.getElementById("result").innerHTML = resStr;
+    } else
+      document.getElementById("result").innerHTML =
+        "Заполните все поля партий !";
   };
 
   onChangeInputs();
+  lessonInputs();
 });

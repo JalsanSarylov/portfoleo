@@ -1,11 +1,98 @@
+* {
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 16px;
+}
+
+.app {
+  /* position: absolute; */
+  display: flex;
+  min-height: 100vh;
+  align-items: center;
+  padding: 0 1rem;
+  /* background-color: rgb(233, 233, 233); */
+}
+
 .container {
-  max-width: 500px;
+  z-index: 1000;
+  padding: 0 1rem;
+  max-width: 340px;
   margin: 0 auto;
   display: flex;
   flex-direction: column;
+  padding: 3rem 5rem;
+  border-radius: 1rem;
+  background-color: white;
+  box-shadow: 0px 15px 20px rgba(20, 20, 20, 0.568);
+}
+
+p {
+  margin: 1rem 0;
+}
+
+h1 {
+  text-align: center;
+  text-transform: uppercase;
+  color: rgb(99, 99, 99);
+  margin-bottom: 2rem;
+}
+
+button {
+  transition: all 0.2s;
+  padding: 0.7rem;
+  border-radius: 0.7rem;
+  border: none;
+  margin: 1rem 0;
+  cursor: pointer;
+  text-transform: uppercase;
+}
+
+button:hover {
+  background-color: #333;
+  color: white;
+  letter-spacing: 0.1rem;
+}
+
+#mas {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+#mas label {
+  margin: 0.4rem;
 }
 
 .mas-item {
+  /* width: 2rem; */
+  margin: 0.4rem 0.3rem;
+}
+
+input {
   width: 2rem;
-  margin-left: 1rem;
+  margin: 0.4rem 0;
+  padding: 0.5rem;
+  border-radius: 0.7rem;
+  border: 1px solid rgb(194, 194, 194);
+}
+
+.inputOne {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.info {
+  color: rgb(112, 112, 112);
+  font-size: 0.8rem;
+  text-align: center;
+}
+
+@media (max-width: 500px) {
+  .container {
+    padding: 2rem 1rem;
+  }
 }
